@@ -1,5 +1,5 @@
 {
-    "name": "kozz/name-case-lib",
+    "name": "kalinichenkoroman/name-case-lib",
     "type": "library",
     "description": "Library for inflecting Russian and Ukrainian Names. Fork of http://namecaselib.com/",
     "keywords": [
