@@ -7,8 +7,7 @@ namespace NCL;
 /**
  * 
  */
-
-
+require_once 'NCLNameCaseCore.php';
 /**
  * <b>NCL NameCase Russian Language</b>
  * 
