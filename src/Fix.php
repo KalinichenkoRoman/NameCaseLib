@@ -2,71 +2,40 @@
 
 namespace NCL;
 
-header('Content-type: text/html; charset=utf-8');
-
 class Fix
 {
-    static $pattern = array();
-    private static function saveSymbols($fullname)
-    {
-        $array = explode(" ", $fullname);
-        for ($i=0; $i < count($array); $i++)
-        { 
-            if (strpos($array[$i], ")"))
-            {
-                self::$pattern[$i] .= " )";             
-            }
-            if (strpos($array[$i], ","))
-            {
-                self::$pattern[$i] .= " ,"; 
-            }
-            if (strpos($array[$i], "."))
-            {
-                self::$pattern[$i] .= " .";
-            }
-        }
-    
-        return self::$pattern;
-    }
+    static $stack = array();
+    static $pattern = "/[),.]/";
 
-    public static function getFormattedOut($fullname)
-    {
-        $array = explode(" ", $fullname);
-        for ($i=0; $i < count($array); $i++)
-        { 
-            if (self::$pattern[$i] == null) 
-            {
-                continue;
-            }
-            if (strpos(self::$pattern[$i], ")"))
-            {
-                $array[$i] .= ")";              
-            }
-            if (strpos(self::$pattern[$i], ","))
-            {
-                $array[$i] .= ",";   
-            }
-            if (strpos(self::$pattern[$i], "."))
-            {
-                $array[$i] .= ".";   
-            }
-        }
-        self::$pattern = array();
-        $fullname = implode(" ", $array);
-        
-        return preg_replace('/\s+/', ' ', $fullname);
-    }
-    
     public static function subSymbols($fullname)
     {
         self::saveSymbols($fullname);
 
-        $fullname = str_replace(")", " ", $fullname);
-        $fullname = str_replace(",", " ", $fullname);
-        $fullname = str_replace(".", " ", $fullname);
-        $fullname = str_replace("-", " ", $fullname);
-        
-        return $fullname;
+        return preg_replace(self::$pattern, "", $fullname);
+    }
+
+    private static function saveSymbols($fullname)
+    {
+        $fullnameArr = explode(" ", $fullname);
+        for ($i=0; $i < count($fullnameArr); $i++)
+        { 
+            preg_match_all(self::$pattern, $fullnameArr[$i], $matches);
+            array_push(self::$stack, implode($matches[0]));
+        }
+
+        return self::$stack;
+    }
+
+    public static function getFormattedOut($fullname)
+    {
+        $fullnameArr = explode(" ", $fullname);
+        for ($i=0; $i < count($fullnameArr); $i++)
+        { 
+            $fullnameArr[$i] .= self::$stack[$i];
+        }
+        self::$stack = array();
+
+        return implode(" ", $fullnameArr);
     }
 }
 
