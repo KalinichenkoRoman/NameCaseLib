@@ -720,6 +720,14 @@ class NCLNameCaseRu extends NCLNameCaseCore
             $second += 0.3;
         }
 
+        
+        if ($this->Last(2) == 'ий')
+        {
+            if ($this->inNames($namepart, array('Мокий', 'Акакий', 'Левкий')))
+            {
+                $first += 10;
+            }
+        }
         /**
          * Слова на мягкий знак. Существует очень мало имен на мягкий знак. Все остальное фамилии
          */
