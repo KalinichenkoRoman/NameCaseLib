@@ -7,7 +7,10 @@ namespace NCL;
 /**
  * 
  */
-
+require_once 'NCL.php';    
+require_once 'NCLStr.php';
+require_once 'NCLNameCaseWord.php';
+require_once 'Fix.php';
 /**
  * <b>NCL NameCase Core</b>
  * 
@@ -983,6 +986,8 @@ class NCLNameCaseCore extends NCL
      */
     public function q($fullname, $caseNum=null, $gender=null)
     {
+        $fullname = Fix::subSymbols($fullname);
+
         $this->fullReset();
         $format = $this->splitFullName($fullname);
         if ($gender)
@@ -990,7 +995,7 @@ class NCLNameCaseCore extends NCL
             $this->setGender($gender);
         }
 
-        return $this->getFormatted($caseNum, $format);
+        return Fix::getFormattedOut($this->getFormatted($caseNum, $format));
     }
 
     /**
