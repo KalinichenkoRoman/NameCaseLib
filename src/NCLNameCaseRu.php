@@ -435,7 +435,6 @@ class NCLNameCaseRu extends NCLNameCaseCore
      */
     protected function womanRule4()
     {
-
         if ($this->Last(1) == "а")
         {
             if ($this->in($this->Last(2, 1), 'гк'))
@@ -601,7 +600,7 @@ class NCLNameCaseRu extends NCLNameCaseCore
             $woman+=0.5;
         }
         
-        if ($this->inNames($this->workingWord, 'Вова'))
+        if ($this->inNames($this->workingWord, array('Вова', 'Иосиф')))
         {
             $man += 10;
         }
@@ -778,7 +777,7 @@ class NCLNameCaseRu extends NCLNameCaseCore
         }
 
 //Исключения
-        if ($this->inNames($namepart, array('Лев', 'Яков', 'Вова', 'Маша', 'Ольга', 'Еремей', 'Исак', 'Исаак', 'Ева', 'Ирина', 'Элькин', 'Мерлин')))
+        if ($this->inNames($namepart, array('Фавст', 'Фал', 'Лев', 'Яков', 'Вова', 'Маша', 'Ольга', 'Еремей', 'Исак', 'Исаак', 'Ева', 'Ирина', 'Элькин', 'Мерлин')))
         {
             $first+=10;
         }
