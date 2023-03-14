@@ -199,7 +199,7 @@ class NCLNameCaseRu extends NCLNameCaseCore
                 $this->Rule(400);
                 return true;
             }
-            elseif ($this->Last(3, 1) == 'а' or $this->in($this->Last(2, 1), 'ел'))
+            elseif ($this->Last(2, 1) == 'а' or $this->in($this->Last(3, 1), 'ел'))
             {
                 $this->wordForms($this->workingWord, array('я', 'ю', 'я', 'ем', 'е'), 1);
                 $this->Rule(401);
@@ -600,11 +600,11 @@ class NCLNameCaseRu extends NCLNameCaseCore
             $woman+=0.5;
         }
         
-        if ($this->inNames($this->workingWord, array('Вова', 'Иосиф')))
+        if ($this->inNames($this->workingWord, array('Вова', 'Иосиф', 'Илия')))
         {
             $man += 10;
         }
-        
+
         $word->setGender($man, $woman);
     }
 
